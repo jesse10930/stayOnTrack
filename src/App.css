@@ -1,38 +1,268 @@
-.App {
+/* Main App */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.4;
+  background: linear-gradient(
+    to left,
+    rgb(24, 71, 133) 0%,
+    rgba(0, 128, 128, 1) 100%
+  );
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+/* Input Component */
+.user-input-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.form-container {
+  width: 70vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+input {
+  max-width: 250px;
+  width: 30vw;
+  margin: 0.4rem 1.4rem;
+  padding: 0.4rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+select {
+  max-width: 83px;
+  width: 10vw;
+  margin: 0.4rem 0;
+  padding: 0.4rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#hours {
+  margin-left: 1.4rem;
+}
+
+.add-task-btn {
+  float: right;
+  font: inherit;
+  border-radius: 5px;
+  box-shadow: 2px 3px;
+}
+
+.end-time-btn {
+  float: right;
+  font: inherit;
+  border-radius: 5px;
+  box-shadow: 2px 3px;
+}
+
+/* Current List Component */
+.curr-task-ul-container {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.curr-task-ul:empty {
+  display: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.curr-task-ul {
+  list-style: inside;
+  display: inline-block;
+  text-align: left;
+  background-color: rgb(239, 239, 239);
+  padding: 15px 20px 15px 20px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 2px solid black;
+  font-size: 1.2rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Sessions Component*/
+.sessions-container {
+  border: 2px solid red;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  width: 100 vw;
+  height: auto;
+}
+
+.all-sessions-container {
+  border: 2px solid white;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 1000px;
+  height: auto;
+}
+
+h3 {
+  text-decoration: underline;
+}
+
+.session-container {
+  text-align: center;
+  background-color: rgb(239, 239, 239);
+  padding: 15px 20px 15px 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+  border: 2px solid black;
+  width: 300px;
+}
+
+.session-ul {
+  display: inline-block;
+  text-align: left;
+  padding: 0px 0px 20px 15px;
+  margin: 0px 0px 0px 0px;
+}
+
+.session-task {
+  font-size: 1.2rem;
+}
+
+/* Start Day Button Component */
+.start-day-button-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.start-btn {
+  font: inherit;
+  border-radius: 5px;
+  box-shadow: 2px 3px;
+}
+
+/* Timer */
+
+/* Countdown */
+.countdown-comp-container {
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
   color: white;
+  font-size: 50px;
 }
 
-.App-link {
-  color: #61dafb;
+.countdown-endtime {
+  font-size: 30px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* CheckList */
+.checklist-container {
+  display: flex;
+  justify-content: center;
+}
+
+.checklist-comp-container {
+  display: inline-block;
+  background-color: rgb(239, 239, 239);
+  padding: 15px 0px;
+  margin-top: 20px;
+  border-radius: 5px;
+  border: 2px solid black;
+}
+
+.check-item {
+  display: flex;
+  align-items: center;
+  width: 250px;
+  padding: 10px 0px;
+}
+
+.check {
+  width: 20px;
+}
+
+.item {
+  font-size: 1.2rem;
+  width: 250px;
+  margin-left: -10px;
+}
+
+.next-btn-container {
+  text-align: center;
+  margin-top: 20px;
+}
+.next-btn {
+  border-radius: 5px;
+  box-shadow: 2px 3px;
+  width: 150px;
+}
+
+/* EndOfDayList Component*/
+.endofdaylist-container {
+  display: flex;
+  justify-content: center;
+}
+
+.endofdaylist-comp-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 1000px;
+}
+
+.endofdayitem-container {
+  text-align: center;
+  display: inline-block;
+  background-color: rgb(239, 239, 239);
+  padding: 15px 20px 15px 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+  border: 2px solid black;
+  width: 320px;
+}
+
+.endofdayitem-lists {
+  display: flex;
+  justify-content: space-around;
+}
+
+.endofdayitem-ul {
+  display: inline-block;
+  text-align: left;
+  padding: 0px 0px 20px 15px;
+  margin: 0px 0px 0px 0px;
+}
+
+.completed-task {
+  font-size: 1.2rem;
+  margin: -30px 20px -30px 0px;
+  padding: 50px 0px 50px 50px;
+  list-style: none;
+  background-image: url('./images/icons8-checkmark-64.png');
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 40px;
+  /* list-style: none;
+  list-style-image: url('./images/icons8-checkmark-64.png'); */
+}
+
+.not-completed-task {
+  font-size: 1.2rem;
+  margin: -30px 20px -30px 0px;
+  padding: 50px 0px 50px 50px;
+  list-style: none;
+  background-image: url('./images/icons8-cancel-48.png');
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 40px;
+  /* list-style: none;
+  list-style-image: url('./images/icons8-cancel-48.png'); */
 }
