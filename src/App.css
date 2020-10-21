@@ -95,20 +95,19 @@ select {
 
 /* Sessions Component*/
 .sessions-container {
-  border: 2px solid red;
   display: flex;
   justify-content: center;
-  width: 100 vw;
+  width: 100vw;
   height: auto;
 }
 
 .all-sessions-container {
-  border: 2px solid white;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   width: 1000px;
   height: auto;
+  margin-top: 10px;
 }
 
 h3 {
