@@ -39,7 +39,7 @@ const Countdown = ({ totCountdownSecs, sessEndTime, curEndTimeSecs }) => {
         setRunning(false);
       }
     }
-  }, [stateCountdownSecs])
+  }, [stateCountdownSecs, audio, curEndTimeSecs, running])
 
   // runs when totCoundownSecs prop changes
   useEffect(() => setStateCountdownSecs(totCountdownSecs), [totCountdownSecs]);
