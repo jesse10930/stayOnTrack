@@ -11,10 +11,10 @@ const EndOfDayItem = ({ id, time, sessTasks }) => {
         <div className='endofdayitem-lists'>
           <ul className='endofdayitem-ul'>
             {/* checked tasks from tasks array */}
-            {sessTasks[0].map((task) => (
+            {sessTasks[0].map((task, index) => (
               <li
                 className='completed-task'
-                key={Math.floor(Math.random() * 1000 + 1)}
+                key={index}
               >
                 {task}
               </li>
@@ -22,10 +22,10 @@ const EndOfDayItem = ({ id, time, sessTasks }) => {
           </ul>
           <ul className='endofdayitem-ul'>
             {/* unchecked tasks from tasks array */}
-            {sessTasks[1].map((task) => (
+            {sessTasks[1].map((task, index) => (
               <li
                 className='not-completed-task'
-                key={Math.floor(Math.random() * 1000 + 1)}
+                key={index}
               >
                 {task}
               </li>

@@ -10,6 +10,7 @@ const Timer = ({ sessList }) => {
   const [statusArray, setStatusArray] = useState([]);
   const [totCountdownSecs, setTotCountdownSecs] = useState(0);
   const [endTimes] = useState(Object.keys(sessList));
+  const [curEndTimeSecs, setcurEndTimeSecs] = useState(0);
 
   // declaring variables
   let checked = [];
@@ -34,6 +35,7 @@ const Timer = ({ sessList }) => {
       (endTimeAmPm === 'a' ? endTimeSecs = endTimeSecs + 43200 : endTimeSecs = endTimeSecs - 43200)
     }
     // change component level count down seconds state and increace component level counter state
+    setcurEndTimeSecs(endTimeSecs);
     setTotCountdownSecs(endTimeSecs - curTimeSecs);
     setCounter(counter + 1)
     // eslint-disable-next-line
@@ -76,6 +78,7 @@ const Timer = ({ sessList }) => {
       setCounter(counter + 1);
       setStatusArray(statusArray => [...statusArray, [checked, unchecked]]);
       setTotCountdownSecs(endTimeSecs - curTimeSecs);
+      setcurEndTimeSecs(endTimeSecs);
     } else {
       // add 1 to comp level counter state and add checked/unchecked arrays to com level status array state
       setCounter(counter + 1);
@@ -91,7 +94,7 @@ const Timer = ({ sessList }) => {
       {endTimes.length > 0 && totCountdownSecs > 0 && counter <= endTimes.length && (
         <div className='countDown-container'>
           {/* passing current endtime and countdown seconds to child */}
-          <Countdown sessEndTime={endTimes[counter-1]} totCountdownSecs={totCountdownSecs}/>
+          <Countdown sessEndTime={endTimes[counter-1]} totCountdownSecs={totCountdownSecs} curEndTimeSecs={curEndTimeSecs}/>
         </div>
       )}
       <div className='checklist-container'>

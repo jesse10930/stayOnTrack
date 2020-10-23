@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-const Countdown = ({ totCountdownSecs, sessEndTime }) => {
+const Countdown = ({ totCountdownSecs, sessEndTime, curEndTimeSecs }) => {
   // initializing component state
   const [stateCountdownSecs, setStateCountdownSecs] = useState(totCountdownSecs);
   const [running, setRunning] = useState(false);
@@ -9,50 +9,27 @@ const Countdown = ({ totCountdownSecs, sessEndTime }) => {
   // declaring variable
   let audio = document.getElementById('beep');
 
-
-
-// // trying to fix bug that occurs when tab becomes idle
-//   const onVisibilityChange = () => {
-//     if (stateCountdownSecs > 0) {
-//       let curTime = new Date();
-//       let curTimeSecs =
-//         (curTime.getHours() * 60 + curTime.getMinutes()) * 60 +
-//         curTime.getSeconds();
-//       let endTimeHour = sessEndTime.substring(0, 2);
-//       let endTimeMin = sessEndTime.substring(3, 5);
-//       let endTimeAmPm = sessEndTime.charAt(6);
-//       let endTimeSecs =
-//         (parseInt(endTimeHour) * 60 + parseInt(endTimeMin)) * 60 +
-//         (endTimeAmPm === 'p' ? 43200 : 0);
-      
-//       // adjusting end time seconds for 12 o'clock am/pm bug
-//       if (parseInt(endTimeHour) === 12) {
-//         (endTimeAmPm === 'a' ? endTimeSecs = endTimeSecs + 43200 : endTimeSecs = endTimeSecs - 43200)
-//       }
-
-//       // set new state countdown when visibility changes if countdown still active
-//       if (endTimeSecs > curTimeSecs) {
-//         setStateCountdownSecs(endTimeSecs - curTimeSecs);
-//       }
-//     }
-//   }
-//   document.addEventListener('visibilitychange', onVisibilityChange, false);
-
-
-
-
   // runs on stateCountdownSecs state change
   useEffect(() => {
     let myTimer;
     // check if state has an active countdown value
-    if (stateCountdownSecs !== 0) {
+    if (stateCountdownSecs > 0) {
       // if state NOT running, change state to true
       if (!running) {
         setRunning(true);
       }
-        // subtract 1 from state countdown every 1 second
-        myTimer = setInterval(() => 
-        setStateCountdownSecs(stateCountdownSecs => stateCountdownSecs - 1), 987);
+        // calculate number of seconds to end time every second and replace in state. ineffecient but works around the idle window issue causing js to slowdown or freeze.
+        myTimer = setInterval(() => {
+          let curTime = new Date();
+          let curTimeSecs =
+            (curTime.getHours() * 60 + curTime.getMinutes()) * 60 +
+            curTime.getSeconds();
+          setStateCountdownSecs(curEndTimeSecs - curTimeSecs);
+        }, 1000);
+
+        // subtract 1 from state countdown every 1 second, this would replace code above if idle window did not throw off countdown
+        // setStateCountdownSecs(stateCountdownSecs => 
+        //   stateCountdownSecs - 1), 987);
         return () => clearInterval(myTimer);
     } else {
       // check if state is actively counting down
@@ -84,7 +61,12 @@ const Countdown = ({ totCountdownSecs, sessEndTime }) => {
       totSecs - 60 * wholeCountdownMins < 10
         ? '0' + String(totSecs - 60 * wholeCountdownMins)
         : String(totSecs - 60 * wholeCountdownMins);
-    return `${hours}:${mins}:${secs}`;
+    // if countdown went passed 0, return 00:00:00
+    if ((totSecs - 60 * wholeCountdownMins) < 0) {
+      return `${hours}:${mins}:00`;
+    } else {
+      return `${hours}:${mins}:${secs}`;
+    }
   };
 
     return (
@@ -101,6 +83,7 @@ const Countdown = ({ totCountdownSecs, sessEndTime }) => {
 Countdown.propTypes = {
   sessList: PropTypes.array,
   totCountdownSecs: PropTypes.number.isRequired,
+  curEndTimeSecs: PropTypes.number.isRequired
 }
 
 export default Countdown;

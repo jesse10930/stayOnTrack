@@ -8,7 +8,7 @@ const Sessions = ({ startBtn, sessList }) => {
       !startBtn && (
         <div className='all-sessions-container'>
           {/* map over session list prop keys, returning a session item div for each */}
-          {Object.keys(sessList).map((time) => (
+          {Object.keys(sessList).map((time, index) => (
             <div className='session-container' key={Math.floor(Math.random() * 1000 + 1)}>
               <h3>
                 Session {Object.keys(sessList).indexOf(time) + 1} End - {time}
@@ -16,10 +16,10 @@ const Sessions = ({ startBtn, sessList }) => {
               <br></br>
               <ul className='session-ul'>
                 {/* map over task list array, return a list item for each task */}
-                {sessList[time].map((task) => (
+                {sessList[time].map((task, index) => (
                   <li
                     className='session-task'
-                    key={Math.floor(Math.random() * 1000 + 1)}
+                    key={index}
                   >
                     {task}
                   </li>
