@@ -8,3 +8,6 @@ To build a front end React app. To practice HTML and CSS. To build an app I can 
 ![screenshot](https://live.staticflickr.com/65535/50996775792_28f7b11297_w.jpg)
 
 # Tech Used
+* React, HTML, CSS, JSX for front end
+* React Hooks used for component render
+* Netlify for deployment
