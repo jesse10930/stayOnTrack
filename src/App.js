@@ -3,9 +3,10 @@ import Sessions from './components/sessions/Sessions';
 import UserInput from './components/userInput/UserInput';
 import StartButton from './components/startButton/StartButton';
 import Timer from './components/timer/Timer';
+import './styles/media.css';
 import './App.css';
 
-const App = () =>  {
+const App = () => {
   // initializing state
   const [curTaskList, setCurTaskList] = useState([]);
   const [sessList, setSessList] = useState({});
@@ -26,44 +27,39 @@ const App = () =>  {
     setStartBtn(true);
   };
 
-    return (
-      <div className='App'>
-        <div className='user-input-container'>
-          {/* current task list array, session list object, start button boolean, update task list action, and update session list action passed to child */}
-          <UserInput
-            curTaskList={curTaskList}
-            sessList={sessList}
-            startBtn={startBtn}
-            updateCurTaskListState={updateCurTaskListState}
-            updateSessListState={updateSessListState}
-          />
-        </div>
-        <div className='sessions-container'>
-          {/* session list object and start button boolean passed to child*/}
-          <Sessions
-            sessList={sessList}
-            startBtn={startBtn}
-          />
-        </div>
-        <div className='start-day-button-container'>
-          {/* session list object, start button boolean, and update task list action passed to child */}
-          <StartButton
-            sessList={sessList}
-            startBtn={startBtn}
-            updateStartButtonState={updateStartButtonState}
-          />
-        </div>
-        {/* if start button pressed, render Timer component */}
-        {startBtn && (
+  return (
+    <div className='App'>
+      <div className='user-input-container'>
+        {/* current task list array, session list object, start button boolean, update task list action, and update session list action passed to child */}
+        <UserInput
+          curTaskList={curTaskList}
+          sessList={sessList}
+          startBtn={startBtn}
+          updateCurTaskListState={updateCurTaskListState}
+          updateSessListState={updateSessListState}
+        />
+      </div>
+      <div className='sessions-container'>
+        {/* session list object and start button boolean passed to child*/}
+        <Sessions sessList={sessList} startBtn={startBtn} />
+      </div>
+      <div className='start-day-button-container'>
+        {/* session list object, start button boolean, and update task list action passed to child */}
+        <StartButton
+          sessList={sessList}
+          startBtn={startBtn}
+          updateStartButtonState={updateStartButtonState}
+        />
+      </div>
+      {/* if start button pressed, render Timer component */}
+      {startBtn && (
         <div className='timer-container'>
           {/* session list object passed to child */}
-          <Timer
-            sessList={sessList}
-          />
+          <Timer sessList={sessList} />
         </div>
-        )}
-      </div>
-    );
-}
+      )}
+    </div>
+  );
+};
 
 export default App;
